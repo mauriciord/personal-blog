@@ -223,16 +223,7 @@ h3 {
 	text-align: center;
 }
 
-.header-section {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
-.header-frame {
-	max-width: 350px;
-}
+/* Header section styles moved to Header.astro component */
 
 article :not(.article-title) {
 	line-height: 1.8;

@@ -4,20 +4,78 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 ---
 
 <header>
-	<div class="header-section">
-		<div class="header-frame">
-			<h1>{SITE_TITLE}</h1>
-			<h2>{SITE_DESCRIPTION}</h2>
-		</div>
-	</div>
+  <div class="header-section">
+    <div class="header-frame">
+      <h1>{SITE_TITLE}</h1>
+      <h2>{SITE_DESCRIPTION}</h2>
+    </div>
+    <div class="header-photo">
+      <img
+        src="/assets/SQUARE-profile_mustache_front.jpg"
+        alt="Mauricio's profile photo"
+        class="profile-img"
+      />
+    </div>
+  </div>
 </header>
 <nav>
-	<HeaderLink href="/">home</HeaderLink>
-	<HeaderLink href="/posts">posts</HeaderLink>
-	<HeaderLink href="https://mauriciord.dev/newsletter">etc</HeaderLink>
+  <HeaderLink href="/">home</HeaderLink>
+  <HeaderLink href="/posts">posts</HeaderLink>
+  <HeaderLink href="https://linkedin.com/in/mauriciord">linkedin</HeaderLink>
+  <HeaderLink href="https://github.com/mauriciord">github</HeaderLink>
+  <HeaderLink href="https://mauriciord.dev/newsletter">etc</HeaderLink>
 </nav>
 <style>
-	h2 {
-		margin: 0.5em 0;
-	}
+  .header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .header-frame {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .header-photo {
+    flex-shrink: 0;
+  }
+
+  .profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gray);
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .profile-img:hover {
+    transform: scale(1.05);
+    border-color: var(--green);
+  }
+
+  h2 {
+    margin: 0.5em 0;
+  }
+
+  @media (max-width: 500px) {
+    .header-section {
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+
+    .header-frame {
+      min-width: unset;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+    }
+  }
 </style>
