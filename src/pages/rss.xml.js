@@ -31,6 +31,5 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION || "",
 		site: context.site,
 		items,
-		stylesheet: "/rss-styles.xsl",
 	});
 }
