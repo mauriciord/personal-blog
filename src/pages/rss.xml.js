@@ -1,31 +1,36 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
-let posts = await getCollection("posts");
+export async function GET(context) {
+	let posts = await getCollection("posts");
 
-posts = posts.sort(
-	(a, b) =>
-		new Date(b.data.updated || b.data.added).valueOf() -
-		new Date(a.data.updated || a.data.added).valueOf()
-);
+	posts = posts.sort(
+		(a, b) =>
+			new Date(b.data.updated || b.data.added).valueOf() -
+			new Date(a.data.updated || a.data.added).valueOf()
+	);
 
-export const GET = () =>
-	rss({
-		title: SITE_TITLE || "",
-		description: SITE_DESCRIPTION || "",
-		site: import.meta.env.SITE,
-		items: posts.map((post) => {
+	const items = await Promise.all(
+		posts.map(async (post) => {
+			const { Content, headings, remarkPluginFrontmatter } = await render(post);
 			return {
 				link: `/post/${post.data.slug}`,
 				title: post.data.title,
 				pubDate: post.data.added,
 				description: post.data.description,
-				content: post.rendered.html,
-				customData: `<updated>${
-					post.data.updated ? post.data.updated : ""
-				}</updated>`,
+				customData: post.data.updated
+					? `<updated>${post.data.updated}</updated>`
+					: "",
 			};
-		}),
+		})
+	);
+
+	return rss({
+		title: SITE_TITLE || "",
+		description: SITE_DESCRIPTION || "",
+		site: context.site,
+		items,
 		stylesheet: "/rss-styles.xsl",
 	});
+}

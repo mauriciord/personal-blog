@@ -1,0 +1,217 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ColorScript from "../components/ColorScript.astro";
+import { SITE_TITLE } from "../config";
+
+const newsletterApi = import.meta.env.NEWSLETTER_API;
+---
+
+<!doctype html>
+<html lang="en-us">
+  <BaseHead
+    title={`Newsletter | ${SITE_TITLE}`}
+    description="A weekly newsletter about web development, software engineering, and life. Join me for technical insights and personal stories."
+  />
+  <body>
+    <Header />
+    <main>
+      <h1 class="newsletter-title">Mauricio's Newsletter</h1>
+      <p class="newsletter-subtitle">a weekly dose of code and life</p>
+
+      <section class="newsletter-content">
+        <p>
+          Every week, I share what's on my mind about <strong>web development</strong>,
+          <strong>software engineering</strong>, and the occasional personal story.
+        </p>
+        <p>
+          From practical tips and lessons learned to thoughts on the industry
+          and life as a developer — no spam, just honest content.
+        </p>
+      </section>
+
+      <section class="subscribe-section">
+        <form
+          id="newsletter-form"
+          class="subscribe-form"
+          data-api={newsletterApi}
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            aria-label="Email address"
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p id="form-message" class="form-message" hidden></p>
+      </section>
+
+      <p class="newsletter-links">
+        <a href="https://buttondown.com/mauriciord/archive">View the archive</a>
+        &middot;
+        <a href="https://buttondown.com/mauriciord/rss">Subscribe via RSS</a>
+      </p>
+    </main>
+    <Footer />
+    <ColorScript />
+
+    <script>
+      const form = document.getElementById("newsletter-form") as HTMLFormElement;
+      const message = document.getElementById("form-message") as HTMLParagraphElement;
+      const apiUrl = form.dataset.api;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+        const button = form.querySelector("button") as HTMLButtonElement;
+        const email = emailInput.value;
+
+        button.disabled = true;
+        button.textContent = "Subscribing...";
+        message.hidden = true;
+
+        try {
+          const formData = new FormData();
+          formData.append("email", email);
+          formData.append("embed", "1");
+
+          const response = await fetch(apiUrl!, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            message.textContent = "Thanks for subscribing! Check your email to confirm.";
+            message.classList.remove("error");
+            message.classList.add("success");
+            emailInput.value = "";
+          } else {
+            throw new Error("Subscription failed");
+          }
+        } catch {
+          message.textContent = "Something went wrong. Please try again.";
+          message.classList.remove("success");
+          message.classList.add("error");
+        } finally {
+          message.hidden = false;
+          button.disabled = false;
+          button.textContent = "Subscribe";
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .newsletter-title {
+    text-align: center;
+    margin-bottom: 0.25em;
+  }
+
+  .newsletter-subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 2em;
+  }
+
+  .newsletter-content {
+    margin-bottom: 2em;
+  }
+
+  .newsletter-content p {
+    margin-bottom: 1em;
+  }
+
+  .subscribe-section {
+    background: var(--pink);
+    padding: 1.5em;
+    border-radius: 8px;
+    margin: 2em 0;
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .subscribe-form input[type="email"] {
+    padding: 0.75em 1em;
+    border: 2px solid var(--black);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .subscribe-form input[type="email"]::placeholder {
+    color: var(--gray);
+  }
+
+  .subscribe-form button {
+    padding: 0.75em 1em;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    background: var(--black);
+    color: var(--white);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .subscribe-form button:hover {
+    opacity: 0.85;
+  }
+
+  .subscribe-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .form-message {
+    margin-top: 1em;
+    padding: 0.75em;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .form-message.success {
+    background: var(--green);
+    color: var(--black);
+  }
+
+  .form-message.error {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .newsletter-links {
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .subscribe-section {
+      background: var(--pink);
+    }
+
+    .subscribe-form input[type="email"] {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .subscribe-form button {
+      background: var(--white);
+      color: var(--black);
+    }
+  }
+</style>
