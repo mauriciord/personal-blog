@@ -19,10 +19,10 @@ I've been using the [Zed editor](https://zed.dev) for a while now and decided to
 
 It's a Solarized-inspired dark theme with deeper, more saturated backgrounds, heavily influenced by craftzdog's [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim). Some highlights:
 
-* Deep teal backgrounds (`#0f1419` editor, `#002b36` panels)
-* Solarized accent palette: cyan strings, blue functions, yellow types, green keywords
-* Italic comments and control flow keywords
-* Full Solarized ANSI terminal palette
+- Deep teal backgrounds (`#0f1419` editor, `#002b36` panels)
+- Solarized accent palette: cyan strings, blue functions, yellow types, green keywords
+- Italic comments and control flow keywords
+- Full Solarized ANSI terminal palette
 
 I submitted it to the official extensions registry via a [pull request to zed-industries/extensions](https://github.com/zed-industries/extensions/pull/6046), and it's now available to install directly from Zed's extension panel. Open the command palette, run `zed: extensions`, and search for **Solarized Osaka**.
 
@@ -36,6 +36,6 @@ It does exactly what the name says, automatically syncing your notes in the back
 
 ![](</assets/back-to-writing-and-more-active-in-the-community/Screenshot 2026-05-13 at 18.35.20.png>)
 
-If you're a Zed user, check out the [Zed Guild](https://zed.dev/community/zed-guild), a community space for Zed enthusiasts. It's a great place to share themes, extensions, tips, and discuss the editor with other passionate users. I've been spending time there and it's worth joining if you're serious about Zed.
+If you're a Zed user, check out the [Zed Guild](https://zed.dev/community/zed-guild), a community space for Zed enthusiasts. It's a great place to share themes, extensions, tips, and discuss the editor with other passionate users.
 
 More posts coming. Let's go.
