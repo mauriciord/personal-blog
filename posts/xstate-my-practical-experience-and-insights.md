@@ -1,6 +1,7 @@
 ---
 title: 'xState: My Practical Experience and Insights'
 slug: xstate-my-practical-experience-and-insights
+locale: en-US
 description: >-
   After spending considerable time working with XState in production
   environments, I want to share my honest perspective on this state management

@@ -1,28 +1,39 @@
 ---
-const { slug, title, tags, description, date } = Astro.props;
+import { DEFAULT_LOCALE, getLocaleCopy, localizedPath } from "../lib/i18n";
+
+const {
+  slug,
+  title,
+  tags,
+  description,
+  date,
+  locale = DEFAULT_LOCALE,
+} = Astro.props;
+const copy = getLocaleCopy(locale);
+const postPath = localizedPath(locale, `/post/${slug}/`);
 ---
 
 <li class="post">
-	<a href={`/post/${slug}/`} class="title">{title}</a>
-	<time datetime={date}>
-		{
-			new Date(date).toLocaleDateString("en-us", {
-				year: "numeric",
-				month: "short",
-				day: "numeric",
-			})
-		}
-	</time>
-	<br />
-	{description && <span class="excerpt">{description}</span>}
-	<div>
-		{
-			tags &&
-				tags.map((tag) => (
-					<a class="tag" href={`/tag/${tag}`}>
-						#{tag}
-					</a>
-				))
-		}
-	</div>
+  <a href={postPath} class="title">{title}</a>
+  <time datetime={date}>
+    {
+      new Date(date).toLocaleDateString(copy.post.dateLocale, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    }
+  </time>
+  <br />
+  {description && <span class="excerpt">{description}</span>}
+  <div>
+    {
+      tags &&
+        tags.map((tag) => (
+          <a class="tag" href={localizedPath(locale, `/tag/${tag}/`)}>
+            #{tag}
+          </a>
+        ))
+    }
+  </div>
 </li>

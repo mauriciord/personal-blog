@@ -1,12 +1,12 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ColorScript from "../components/ColorScript.astro";
-import { DEFAULT_LOCALE, getLocaleCopy, getLocaleInfo } from "../lib/i18n";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ColorScript from "../../components/ColorScript.astro";
+import { getLocaleCopy, getLocaleInfo } from "../../lib/i18n";
 
 const newsletterApi = import.meta.env.NEWSLETTER_API;
-const locale = DEFAULT_LOCALE;
+const locale = "pt-BR";
 const localeInfo = getLocaleInfo(locale);
 const copy = getLocaleCopy(locale);
 const newsletter = copy.newsletter;
@@ -17,7 +17,7 @@ const newsletter = copy.newsletter;
   <BaseHead
     title={newsletter.pageTitle}
     description={newsletter.pageDescription}
-    canonical="/newsletter/"
+    canonical={localeInfo.newsletter}
     locale={locale}
     alternatePath="/newsletter/"
   />

@@ -1,20 +1,21 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import Post from "../../components/Post.astro";
-import ColorScript from "../../components/ColorScript.astro";
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Post from "../../../components/Post.astro";
+import ColorScript from "../../../components/ColorScript.astro";
 import {
-  DEFAULT_LOCALE,
   getLocaleCopy,
   getLocaleInfo,
   getLocalizedPosts,
   sortPosts,
-} from "../../lib/i18n";
+} from "../../../lib/i18n";
+
+const locale = "pt-BR";
 
 export async function getStaticPaths() {
-  const posts = getLocalizedPosts(await getCollection("posts"), DEFAULT_LOCALE);
+  const posts = getLocalizedPosts(await getCollection("posts"), "pt-BR");
   const tags = posts.reduce((allTags, post) => {
     const postTags = post.data.tags;
     if (postTags) {
@@ -38,7 +39,6 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.props;
 const { tag: currentTag } = Astro.params;
-const locale = DEFAULT_LOCALE;
 const localeInfo = getLocaleInfo(locale);
 const copy = getLocaleCopy(locale);
 
@@ -50,7 +50,7 @@ let sortedPosts = sortPosts(tag);
   <BaseHead
     title={copy.tags.pageTitle(currentTag)}
     description={copy.tags.pageDescription(currentTag)}
-    canonical={`/tag/${currentTag}/`}
+    canonical={`/pt-BR/tag/${currentTag}/`}
     locale={locale}
   />
   <body>

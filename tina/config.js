@@ -26,6 +26,7 @@ export default defineConfig({
 				path: "posts",
 				defaultItem: () => ({
 					title: "New Post",
+					locale: "en-US",
 					added: new Date(),
 					tags: [],
 				}),
@@ -39,6 +40,22 @@ export default defineConfig({
 					},
 				},
 				fields: [
+					{
+						label: "Locale",
+						name: "locale",
+						type: "string",
+						options: [
+							{
+								value: "en-US",
+								label: "English (US)",
+							},
+							{
+								value: "pt-BR",
+								label: "Português (Brasil)",
+							},
+						],
+						required: true,
+					},
 					{
 						name: "title",
 						label: "Title",
@@ -124,7 +141,7 @@ export default defineConfig({
 	search: {
 		tina: {
 			indexerToken: process.env.TINASEARCH,
-			stopwordLanguages: ["eng"],
+			stopwordLanguages: ["eng", "por"],
 		},
 		indexBatchSize: 50,
 		maxSearchIndexFieldLength: 100,

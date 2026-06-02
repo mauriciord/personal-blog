@@ -1,16 +1,16 @@
 import { getCollection } from "astro:content";
-import { AUTHOR_NAME } from "../config";
+import { AUTHOR_NAME } from "../../config";
 import {
-  DEFAULT_LOCALE,
   getLocaleCopy,
   getLocaleInfo,
   getLocalizedPosts,
   localizedPath,
   sortPosts,
-} from "../lib/i18n";
+} from "../../lib/i18n";
+
+const locale = "pt-BR";
 
 export async function GET(context) {
-  const locale = DEFAULT_LOCALE;
   const copy = getLocaleCopy(locale);
   const localeInfo = getLocaleInfo(locale);
   const posts = sortPosts(
@@ -32,11 +32,11 @@ ${AUTHOR_NAME}: ${copy.authorDescription}
 
 ## ${copy.llms.corePages}
 
-- [Home](${new URL(localeInfo.home, site)}) — ${copy.llms.homeDescription}
-- [About](${new URL(localeInfo.about, site)}) — ${copy.llms.aboutDescription}
+- [Início](${new URL(localeInfo.home, site)}) — ${copy.llms.homeDescription}
+- [Sobre](${new URL(localeInfo.about, site)}) — ${copy.llms.aboutDescription}
 - [Posts](${new URL(localeInfo.posts, site)}) — ${copy.llms.postsDescription}
 - [Newsletter](${new URL(localeInfo.newsletter, site)}) — ${copy.llms.newsletterDescription}
-- [Blog RSS](${new URL(localeInfo.rss, site)}) — ${copy.llms.rssDescription}
+- [RSS](${new URL(localeInfo.rss, site)}) — ${copy.llms.rssDescription}
 - [Sitemap](${new URL("/sitemap-index.xml", site)}) — ${copy.llms.sitemapDescription}
 
 ## ${copy.llms.posts}

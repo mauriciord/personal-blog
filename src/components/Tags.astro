@@ -1,18 +1,22 @@
 ---
-const { tags, all } = Astro.props;
+import { DEFAULT_LOCALE, getLocaleCopy, localizedPath } from "../lib/i18n";
+
+const { tags = [], all, locale = DEFAULT_LOCALE } = Astro.props;
+const copy = getLocaleCopy(locale);
 ---
 
-{all && <h3 class="tag-title">View posts by tag</h3>}
-<div class=`${all && "tags"}`>
-	{
-		tags &&
-			tags.map((tag) => (
-				<>
-					<a class="tag" href={`/tag/${tag}`}>
-						#{tag}
-					</a>
-					{` `}
-				</>
-			))
-	}
-</div>
+{all && tags.length > 0 && <h3 class="tag-title">{copy.tags.title}</h3>}
+{
+  tags.length > 0 && (
+    <div class:list={[{ tags: all }]}>
+      {tags.map((tag) => (
+        <>
+          <a class="tag" href={localizedPath(locale, `/tag/${tag}/`)}>
+            #{tag}
+          </a>
+          {` `}
+        </>
+      ))}
+    </div>
+  )
+}

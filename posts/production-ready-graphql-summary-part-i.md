@@ -1,6 +1,7 @@
 ---
 title: Production Ready GraphQL Summary — Part I
 slug: production-ready-graphql-summary-part-i
+locale: en-US
 description: "I'm reading this book with GraphQL content. Thanks @leonardomso Pagination: Cursor Pagination Cursor pagination is generally a great choice, because of the accuracy and performance Maybe it's the..."
 tags: []
 added: 2020-04-23T13:26:18.000Z

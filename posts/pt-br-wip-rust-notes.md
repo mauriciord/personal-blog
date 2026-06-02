@@ -1,13 +1,13 @@
 ---
-title: "[WIP] Rust  - NOTES"
+title: "[WIP] Rust  - NOTAS"
 slug: wip-rust-notes
-locale: en-US
+locale: pt-BR
 description: "Tuple let numbers: (i32, i32, f64) = (1, 2, 3.5); // destructuring let (a, b, c) = numbers; // mutable let mut mau = (10, 11, 12) mau.0 = 90 // (90, 11, 12) mau = (90, 91, 92) // pattern matching..."
 tags: []
 added: 2023-09-11T23:19:24.304Z
 ---
 
-### Tuple
+### Tupla
 
 ```rust
 let numbers: (i32, i32, f64) = (1, 2, 3.5);
@@ -15,14 +15,14 @@ let numbers: (i32, i32, f64) = (1, 2, 3.5);
 // destructuring
 let (a, b, c) = numbers;
 
-// mutable
+// mutável
 let mut mau = (10, 11, 12)
 mau.0 = 90 // (90, 11, 12)
 
 mau = (90, 91, 92) // pattern matching
 ```
 
-> need to respect the type to avoid `mismatched types`
+> precisa respeitar o tipo para evitar `mismatched types`
 
 ### Array
 
@@ -39,43 +39,43 @@ morpheu[2] = 10.15
 &neo[1..2] // [2]
 ```
 
-> arrays should have only one type
+> arrays devem ter apenas um tipo
 
-#### Out-of-bound error
+#### Erro de fora dos limites
 
-* Trying to get an element out of the limits: **index out of bounds**
+* Tentar obter um elemento fora dos limites: **index out of bounds**
     
 
-### Memory Awareness
+### Consciência de Memória
 
-* STATIC memory needs fixed-size
+* A memória STATIC precisa ter tamanho fixo
     
-    * lifetime is the whole program
+    * o lifetime é o programa inteiro
         
-    * static variables
+    * variáveis estáticas
         
-    * string literals
+    * literais de string
         
-    * program binary
+    * binário do programa
         
-    * Cleanup is when the program terminates
+    * a limpeza acontece quando o programa termina
         
 
 ```rust
 static _Y: u32 = 13
 ```
 
-* STACK are local variables,
+* STACK são variáveis locais,
     
-    * memory has a dynamic size
+    * a memória tem tamanho dinâmico
         
-    * Each thread has an isolated stack
+    * cada thread tem uma stack isolada
         
-    * function arguments
+    * argumentos de função
         
-    * Cleanup is when the function returns
+    * a limpeza acontece quando a função retorna
         
-    * lifetime is a function
+    * o lifetime é uma função
         
 
 ```rust
@@ -88,19 +88,19 @@ fn main() {
 }
 ```
 
-* HEAP memory
+* memória HEAP
     
-    * values that live beyond functions
+    * valores que vivem além das funções
         
-    * shared across threads
+    * compartilhada entre threads
         
-    * large values
+    * valores grandes
         
-    * large values
+    * valores grandes
         
-    * dynamic size values
+    * valores de tamanho dinâmico
         
-    * lifetime defined by programmers or language
+    * lifetime definido por programadores ou pela linguagem
         
 
 ```rust
@@ -115,6 +115,6 @@ fn main() {
 }
 ```
 
-### Memory Cleanup
+### Limpeza de Memória
 
-* **drop** method to clean up it
+* método **drop** para limpá-la

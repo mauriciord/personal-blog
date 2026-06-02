@@ -1,37 +1,37 @@
 ---
-title: Resolving Expo Multi Select Photos with React Hooks
+title: Resolvendo seleção múltipla de fotos no Expo com React Hooks
 slug: resolving-expo-multi-select-photos-with-react-hooks
-locale: en-US
-description: "title: Resolving Expo Multi Select Photos with React Hooks published: true date: 2019-11-21 15:18:31 UTC tags: Expo,React Native,javascript canonical_url: https://atalkwith.dev/expo-multip,e-selection..."
+locale: pt-BR
+description: "Resolvendo seleção múltipla de fotos no Expo com React Hooks"
 tags: []
 added: 2019-11-21T15:18:31.000Z
 ---
 
 Created: Nov 26, 2019 10:07 PM Tags: Expo, React Native, javascript
 
-# Introduction
+# Introdução
 
-Do you know the [Expo](https://expo.io) project? Expo is a framework and a platform for universal React applications. It is a set of tools and services built around React Native and native platforms that help you develop, build, deploy, and quickly iterate on iOS, Android, and web apps from the same JavaScript/TypeScript codebase.
+Você conhece o projeto [Expo](https://expo.io)? Expo é um framework e uma plataforma para aplicações React universais. É um conjunto de ferramentas e serviços construído em torno de React Native e de plataformas nativas que ajuda você a desenvolver, compilar, publicar e iterar rapidamente em apps para iOS, Android e web a partir da mesma base de código JavaScript/TypeScript.
 
 ## Workflows
 
-The two approaches to building applications with Expo tools are called the “managed” and “bare” workflows.
+As duas abordagens para construir aplicações com as ferramentas do Expo são chamadas de workflows “managed” e “bare”.
 
-- With the managed workflow you only write JavaScript / TypeScript and Expo tools and services take care of the rest for you.
-- In the bare workflow, you have full control over every aspect of the native project, and Expo tools can’t help quite as much.
+- Com o workflow managed, você escreve apenas JavaScript / TypeScript e as ferramentas e serviços do Expo cuidam do resto para você.
+- No workflow bare, você tem controle total sobre todos os aspectos do projeto nativo, e as ferramentas do Expo não conseguem ajudar tanto.
 
-We won’t tell about the **bare workflow** at this moment, only a problem with so many people using Expo SDK 33 or later.
+Não vamos falar do **bare workflow** neste momento, apenas de um problema comum entre muitas pessoas que usam Expo SDK 33 ou superior.
 
 ## Expo ImagePicker - launchImageLibraryAsync
 
-There is the `ImagePicker` on the API for display the system UI for choosing an image or video from the phone’s library, but there isn’t a way to allow multiple selections of images, as you can see [here](https://docs.expo.io/versions/v35.0.0/sdk/imagepicker/#imagepickerlaunchimagelibraryasyncoptions). There are some feature requests here:
+Existe o `ImagePicker` na API para exibir a interface do sistema para escolher uma imagem ou vídeo da biblioteca do celular, mas não há um jeito de permitir seleção múltipla de imagens, como você pode ver [aqui](https://docs.expo.io/versions/v35.0.0/sdk/imagepicker/#imagepickerlaunchimagelibraryasyncoptions). Há algumas solicitações de recurso aqui:
 
 - [https://expo.canny.io/feature-requests/p/allow-choosing-multiple-images-in-imagepicker](https://expo.canny.io/feature-requests/p/allow-choosing-multiple-images-in-imagepicker)
 - [https://expo.canny.io/feature-requests/p/multiple-images-and-cameravideo-access-for-image-picker](https://expo.canny.io/feature-requests/p/multiple-images-and-cameravideo-access-for-image-picker)
 
-# The solution with React Hooks
+# A solução com React Hooks
 
-In React Native, you can use the **Camera Roll API** to get media from the phone’s library, then why not build a hook for that? :]
+Em React Native, você pode usar a **Camera Roll API** para obter mídia da biblioteca do celular; então por que não criar um hook para isso? :]
 
 ```js
 import { useCallback, useState } from 'react';
@@ -69,7 +69,7 @@ export default function useCameraRoll({
 }
 ```
 
-After that, you simply use it like this:
+Depois disso, você simplesmente usa assim:
 
 ```js
 // path to your hooks
@@ -84,7 +84,7 @@ function SomeComponent() {
 }
 ```
 
-You can use `getPhotos` in a `FlatList onEndReached` props , for instance. Problem solved :]
+Você pode usar `getPhotos` na prop `onEndReached` de um `FlatList`, por exemplo. Problema resolvido :]
 
 ### References
 

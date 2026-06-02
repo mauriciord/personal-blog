@@ -1,30 +1,29 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import HomePosts from "../components/HomePosts.astro";
-import ColorScript from "../components/ColorScript.astro";
-import Tags from "../components/Tags.astro";
-import AboutContent from "../components/AboutContent.astro";
-import {
-  DEFAULT_LOCALE,
-  getLocaleCopy,
-  getLocalizedPosts,
-  getLocaleInfo,
-  sortPosts,
-} from "../lib/i18n";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import HomePosts from "../../components/HomePosts.astro";
+import ColorScript from "../../components/ColorScript.astro";
+import Tags from "../../components/Tags.astro";
+import AboutContent from "../../components/AboutContent.astro";
 import {
   AUTHOR_IMAGE,
   AUTHOR_NAME,
   PERSON_ID,
   SITE_URL,
   SOCIAL_LINKS,
-} from "../config";
-import getTags from "../scripts/getTags";
+} from "../../config";
+import {
+  getLocaleCopy,
+  getLocaleInfo,
+  getLocalizedPosts,
+  sortPosts,
+} from "../../lib/i18n";
+import getTags from "../../scripts/getTags";
 
+const locale = "pt-BR";
 const allPosts = await getCollection("posts");
-const locale = DEFAULT_LOCALE;
 const posts = sortPosts(getLocalizedPosts(allPosts, locale));
 const tags = getTags(posts);
 const site = Astro.site ?? SITE_URL;
@@ -35,7 +34,7 @@ const websiteSchema = {
   "@type": "WebSite",
   name: copy.siteTitle,
   description: copy.siteDescription,
-  url: new URL("/", site).toString(),
+  url: new URL(localeInfo.home, site).toString(),
   inLanguage: locale,
   author: { "@id": PERSON_ID },
 };
@@ -45,7 +44,7 @@ const personSchema = {
   "@id": PERSON_ID,
   name: AUTHOR_NAME,
   description: copy.authorDescription,
-  url: new URL("/about/", site).toString(),
+  url: new URL(localeInfo.about, site).toString(),
   image: new URL(AUTHOR_IMAGE, site).toString(),
   sameAs: SOCIAL_LINKS,
 };
@@ -56,7 +55,7 @@ const personSchema = {
   <BaseHead
     title={copy.siteTitle}
     description={copy.siteDescription}
-    canonical="/"
+    canonical={localeInfo.home}
     locale={locale}
     alternatePath="/"
     structuredData={[websiteSchema, personSchema]}

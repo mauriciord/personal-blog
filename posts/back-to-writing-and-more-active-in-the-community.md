@@ -1,6 +1,7 @@
 ---
 title: Back to Writing and More Active in the Community
 slug: back-to-writing-and-more-active-in-the-community
+locale: en-US
 description: >-
   I'm committing to posting here more regularly and sharing what I've been
   building in the open-source community.

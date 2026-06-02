@@ -1,6 +1,7 @@
 ---
 title: How to insert an Expo project in a Monorepo
 slug: how-to-insert-an-expo-project-in-a-monorepo
+locale: en-US
 description: "Introduction In this post, I'll cover about adding an Expo project inside a Monorepo project. I found on the internet so many people trying to do this, asking in some forums, or commenting something..."
 tags: []
 added: 2020-04-09T01:10:29.000Z

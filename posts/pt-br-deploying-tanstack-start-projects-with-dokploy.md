@@ -1,55 +1,55 @@
 ---
-title: Deploying Tanstack Start Projects with Dokploy
+title: Implantando Projetos Tanstack Start com Dokploy
 slug: deploying-tanstack-start-projects-with-dokploy
-locale: en-US
+locale: pt-BR
 description: >-
-  Effortlessly Deploy Tanstack Start Projects Using Dokploy: A Cost-Effective
-  Self-Hosted Solution
+  Implante projetos Tanstack Start com facilidade usando Dokploy: uma solução
+  self-hosted econômica
 tags:
   - projects
 added: 2025-12-16T22:37:40.230Z
 ---
 
-# Blog Post
+# Post do Blog
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/u0ZLmBEs-clipboard.png)
 
-# Deploying Tanstack Start Projects with Dokploy
+# Implantando Projetos Tanstack Start com Dokploy
 
-This blog post is heavily inspired by [NEXTY.DEV's guide on deploying Next.js projects with Dokploy](https://nexty.dev/docs/start-project/dokploy). While their documentation provides an excellent walkthrough for Next.js applications, I wanted to explore how the same self-hosted deployment approach could work with TanStack Start—the new full-stack React framework from the TanStack ecosystem. If you're looking for a cost-effective alternative to platforms like Vercel or Railway for your TanStack Start projects, Dokploy offers a compelling open-source PaaS solution that runs on your own infrastructure.
+Este post é fortemente inspirado no [guia da NEXTY.DEV sobre implantação de projetos Next.js com Dokploy](https://nexty.dev/docs/start-project/dokploy). Embora a documentação deles traga um excelente passo a passo para aplicações Next.js, eu quis explorar como a mesma abordagem de implantação self-hosted poderia funcionar com o TanStack Start — o novo framework full-stack de React do ecossistema TanStack. Se você está procurando uma alternativa econômica a plataformas como Vercel ou Railway para seus projetos TanStack Start, o Dokploy oferece uma solução PaaS open source bastante interessante que roda na sua própria infraestrutura.
 
-## What is Dokploy
+## O que é Dokploy
 
-Dokploy is an open-source self-hosted PaaS (Platform as a Service) that serves as an alternative to services like Vercel, Netlify, Railway, and Zeabur.
+Dokploy é um PaaS self-hosted e open source (Platform as a Service) que serve como alternativa a serviços como Vercel, Netlify, Railway e Zeabur.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/i1Wxo9IU-clipboard.png)
 
-## Server Setup and Dokploy Installation
+## Configuração do Servidor e Instalação do Dokploy
 
-### Purchase a Server
+### Comprar um Servidor
 
-Using Dokploy requires purchasing your own server. If you're unsure which provider to choose, consider [hostinger](https://www.hostinger.com/). For initial projects, a 2-core 8GB VPS is sufficient, costing only $6.49 per month.
+Para usar Dokploy, você precisa comprar seu próprio servidor. Se estiver em dúvida sobre qual provedor escolher, considere [hostinger](https://www.hostinger.com/). Para projetos iniciais, uma VPS de 2 núcleos e 8 GB é suficiente, custando apenas $6.49 por mês.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/jQmTzR2V-clipboard.png)
 
-### Configure the Server
+### Configurar o Servidor
 
-After payment, complete the VPS setup following the on-screen instructions. Once configured, the dashboard will show the VPS is running.
+Após o pagamento, conclua a configuração da VPS seguindo as instruções na tela. Depois de configurada, o painel mostrará que a VPS está em execução.
 
-Next, configure firewall rules. Hostinger has no default firewall rules, meaning all ports are open, which poses security risks. We need to create firewall rules to allow access to ports 22, 80, 443, and 3000.
+Em seguida, configure as regras de firewall. A Hostinger não vem com regras padrão de firewall, o que significa que todas as portas ficam abertas, trazendo riscos de segurança. Precisamos criar regras para permitir acesso às portas 22, 80, 443 e 3000.
 
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/qJXxsy1D-clipboard.png)
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/taU9gp4C-clipboard.png)
 
-## Install Dokploy
+## Instalar o Dokploy
 
-Open the VPS Terminal
+Abra o terminal da VPS
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/TK9tLIzZ-clipboard.png)
 
-Log in to the VPS via SSH and execute the Dokploy installation command:
+Faça login na VPS via SSH e execute o comando de instalação do Dokploy:
 
 ```bash
 curl -sSL https://dokploy.com/install.sh | sh
@@ -57,37 +57,37 @@ curl -sSL https://dokploy.com/install.sh | sh
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/ivSXWGQW-clipboard.png)
 
-After installation completes, visit the address shown in the command output to access the Dokploy dashboard.
+Depois que a instalação terminar, acesse o endereço mostrado na saída do comando para abrir o painel do Dokploy.
 
-### Configure Dokploy
+### Configurar o Dokploy
 
-After registration and login, first set up a custom domain for the dashboard:
+Depois de se registrar e fazer login, primeiro configure um domínio personalizado para o painel:
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/E5dc4_rn-clipboard.png)
 
-Then add a DNS record for this custom domain in your domain resolution platform (using CloudFlare as an example), select A type resolution, and enter the server IP address.
+Depois adicione um registro DNS para esse domínio personalizado na sua plataforma de DNS (usando a CloudFlare como exemplo), selecione a resolução do tipo A e informe o IP do servidor.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/8FRa9vTw-clipboard.png)
 
-Once the DNS propagates, you can access the Dokploy dashboard through the custom domain.
+Depois que o DNS propagar, você poderá acessar o painel do Dokploy por meio do domínio personalizado.
 
-Finally, connect your Git account as shown:
+Por fim, conecte sua conta Git como mostrado abaixo:
 
 ## ![](/assets/deploying-tanstack-start-projects-with-dokploy/LdZ0pagx-clipboard.png)
 
-## Deployment
+## Implantação
 
-Dokploy provides a Vercel-like visual deployment interface.
+O Dokploy oferece uma interface visual de implantação parecida com a do Vercel.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/Fv9Z4Cty-clipboard.png)
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/B7MXcZLv-clipboard.png)
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/VR8lhPo0-clipboard.png)
 
-Enter the Service page, set the Provider by selecting Github Account, Repository, and Branch in sequence, then **click Save**.
+Entre na página do Service, defina o Provider selecionando, em sequência, Github Account, Repository e Branch, e então **clique em Save**.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/_g-IBsaZ-clipboard.png)
 
-Configure environment variables. You need to redeploy the project after each modification:
+Configure as variáveis de ambiente. Você precisa redeployar o projeto após cada alteração:
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/4NIEqaQZ-Screenshot_2025-12-12_at_10.51.47.png)
 
@@ -98,7 +98,7 @@ HOST=0.0.0.0
 NIXPACKS_START_CMD="node server.js"
 ```
 
-Before going back to the General tab (main page), let's add some new stuff to the Tanstack Start Project.
+Antes de voltar para a aba General (página principal), vamos adicionar algumas coisas novas ao projeto Tanstack Start.
 
 ```js
 
@@ -150,7 +150,7 @@ const { default: handler } = await import("./dist/server/server.js");
 const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  // Try static files first for /assets/* and common static files
+  // Tenta servir arquivos estáticos primeiro para /assets/* e arquivos estáticos comuns
   if (url.pathname.startsWith("/assets/") ||
       url.pathname === "/favicon.png" ||
       url.pathname === "/robots.txt") {
@@ -162,7 +162,7 @@ const server = createServer(async (req, res) => {
     }
   }
 
-  // Convert Node.js request to Web Request
+  // Converte a requisição Node.js para uma Web Request
   const headers = new Headers();
   for (const [key, value] of Object.entries(req.headers)) {
     if (value) headers.set(key, Array.isArray(value) ? value.join(", ") : value);
@@ -209,7 +209,7 @@ server.listen(port, host, () => {
 ```
 
 ```json
-/* ... package.json scripts ... */
+/* ... scripts do package.json ... */
 
   "build": "vite build",
   "postbuild": "cp -r dist/client/* public/",
@@ -240,27 +240,27 @@ export default defineConfig({
 
 ```
 
-Access General page and click on the Deploy button.
+Acesse a página General e clique no botão Deploy.
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/PGdEyyZl-Screenshot_2025-12-12_at_11.30.52.png)
 
-View build progress
+Veja o progresso da build
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/Vw3k8ugu-clipboard.png)
 
-Configure custom domain
+Configure o domínio personalizado
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/UqZm2VC1-clipboard.png)
 
 ![](/assets/deploying-tanstack-start-projects-with-dokploy/nsv_ZkdA-clipboard.png)
 
 
-After the build completes, you need to set up DNS in Cloudflare.
+Depois que a build terminar, você precisa configurar o DNS no Cloudflare.
 
 ```
-A record:
-your-domain.com -> Your server IP
-Enable Proxy
+Registro A:
+seu-dominio.com -> IP do seu servidor
+Ativar Proxy
 ```
 
-After completing these configurations, the project will be deployed and run successfully on Dokploy. Every code push will automatically trigger a new deployment.
+Depois de concluir essas configurações, o projeto será implantado e executado com sucesso no Dokploy. Cada push de código acionará automaticamente uma nova implantação.

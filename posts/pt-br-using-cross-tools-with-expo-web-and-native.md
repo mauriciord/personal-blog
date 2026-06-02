@@ -1,21 +1,21 @@
 ---
-title: Using cross tools with Expo Web and Native
+title: Usando ferramentas cross-platform com Expo Web e Native
 slug: using-cross-tools-with-expo-web-and-native
-locale: en-US
-description: "title: Using cross tools with Expo Web and Native published: true date: 2019-12-03 02:57:00 UTC tags: Expo,React Native,javascript canonical_url: https://atalkwith.dev/cross-tools-with-expo..."
+locale: pt-BR
+description: "Usando ferramentas cross-platform com Expo Web e Native"
 tags: []
 added: 2019-12-03T02:57:00.000Z
 ---
 
 first post of Expo series: https://dev.to/atalkwithdev/resolving-expo-multi-select-photos-with-react-hooks-487k
 
-Continuing my series of posts about Expo, today we will discover how to use common development tools like **Reactotron** and **Sentry** in a cross-platform application using Expo.
+Continuando minha série de posts sobre Expo, hoje vamos descobrir como usar ferramentas comuns de desenvolvimento como **Reactotron** e **Sentry** em uma aplicação multiplataforma usando Expo.
 
 ## Expo Web
 
-Let’s suppose that you’re going to build a Web version of your app (an Android/iOS app, but now you want a Web platform of this app), what would you do?
+Vamos supor que você vai criar uma versão Web do seu app (um app Android/iOS, mas agora você quer uma plataforma Web para esse app). O que você faria?
 
-First of all, let’s add a “web” option in the `app.json` as a platform:
+Antes de tudo, vamos adicionar uma opção `web` no `app.json` como plataforma:
 
 ```json
 "platforms": [
@@ -25,25 +25,25 @@ First of all, let’s add a “web” option in the `app.json` as a platform:
 ],
 ```
 
-After that:
+Depois disso:
 
 ```
 yarn add react-native-web react-dom
 ```
 
-Now, you can just start your app :]
+Agora, você já pode iniciar seu app :]
 
-Maybe you got an error from `./RCTNetworking` that doesn’t leave your app starts. Probably you’ll get this error if you are already using **Reactotron** solution.
+Talvez você tenha recebido um erro de `./RCTNetworking` que impede seu app de iniciar. Provavelmente esse erro aparece se você já estiver usando a solução **Reactotron**.
 
-## Installing / Fixing Reactotron
+## Instalando / Corrigindo o Reactotron
 
 ![reactotron interface](https://atalkwith.dev/media/screen_shot_2019-12-01_at_22.45.44.png "reactotron interface")
 
-Let’s install the **Reactotron Client** at our machine following this [installation guide](https://github.com/infinitered/reactotron/blob/master/docs/installing.md). Then, we can create our files to each platform only writing the file extension prefix. _i.e.:_ `index.native.js` and `index.web.js`
+Vamos instalar o **Reactotron Client** na nossa máquina seguindo este [guia de instalação](https://github.com/infinitered/reactotron/blob/master/docs/installing.md). Depois, podemos criar nossos arquivos para cada plataforma escrevendo apenas o prefixo da extensão. _ex.:_ `index.native.js` e `index.web.js`
 
-The `*.web.js` means that code will build and run only in the Web platform, the same approach is to the `*.native.js`, but to the iOS/Android Platform.
+`*.web.js` significa que o código será compilado e executado apenas na plataforma Web; a mesma ideia vale para `*.native.js`, mas para iOS/Android.
 
-Create a folder called **reactotron** on your app and then create the two files:
+Crie uma pasta chamada **reactotron** no seu app e depois crie os dois arquivos:
 
 - `index.native.js`
 - `index.web.js`
@@ -100,7 +100,7 @@ if ( __DEV__ ) {
 yarn add -D reactotron-react-js reactotron-redux reactotron-redux-saga
 ```
 
-After that, you have to add that configuration in somewhere.
+Depois disso, você precisa adicionar essa configuração em algum lugar.
 
 **App.js:**
 
@@ -113,19 +113,19 @@ import 'path/to/your/reactotron';
 registerRootComponent(AppContainer);
 ```
 
-Now, if you build the app for Web, it will use the web configuration, if you build the app for Native, it will use the Native configuration.
+Agora, se você compilar o app para Web, ele usará a configuração web; se compilar para Native, usará a configuração nativa.
 
-You will apply the same approach to Sentra tool, but you can follow this guide :]
+Você vai aplicar a mesma abordagem à ferramenta Sentra, mas pode seguir este guia :]
 
-## Configuring Sentry
+## Configurando o Sentry
 
-Unfortunately, there is a bug issue with Sentry Expo v.2.x with the Web Platform, then let’s use an older version, and let’s add the Sentry Browser to the Web Platform too.
+Infelizmente, existe um bug no Sentry Expo v.2.x com a plataforma Web, então vamos usar uma versão mais antiga e também adicionar o Sentry Browser para a plataforma Web.
 
 ```
 yarn add sentry-expo@1.13.0 @sentry/browser
 ```
 
-After that, let’s configure our Sentry project, following the approach of the Reactotron, create a folder called **sentry** on your app and then create the three files:
+Depois disso, vamos configurar nosso projeto Sentry. Seguindo a mesma abordagem do Reactotron, crie uma pasta chamada **sentry** no seu app e depois crie os três arquivos:
 
 - `sentry.native.js`
 - `sentry.web.js`
@@ -164,7 +164,7 @@ import Sentry from './sentry';
 export default Sentry;
 ```
 
-When you want to use **Sentry** to capture exceptions, you just import it:
+Quando você quiser usar **Sentry** para capturar exceções, basta importá-lo:
 
 ```js
 import Sentry from 'path/to/your/sentry';
@@ -179,6 +179,6 @@ import Sentry from 'path/to/your/sentry';
 - [https://github.com/infinitered/reactotron](https://github.com/infinitered/reactotron)
 - [https://forums.expo.io/t/sentry-api-does-not-work/27321/36](https://forums.expo.io/t/sentry-api-does-not-work/27321/36)
 
-I hope you enjoy this post, and soon I will post more about Expo and how to deliver a great value to your company and your clients using it.
+Espero que você tenha gostado deste post, e em breve publicarei mais sobre Expo e sobre como entregar grande valor para sua empresa e seus clientes usando essa tecnologia.
 
-Thank you :]
+Obrigado :]

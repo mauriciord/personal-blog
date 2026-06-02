@@ -1,12 +1,16 @@
 ---
+import { DEFAULT_LOCALE, getLocaleCopy } from "../lib/i18n";
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const copy = getLocaleCopy(locale);
 const today = new Date();
 ---
 
 <footer>
   &copy; {today.getFullYear()}. <a
     href="https://github.com/mauriciord/personal-blog"
-    >This blog is open source</a
-  >! <3
+    >{copy.footer.openSource}</a
+  >! &lt;3
 </footer>
 <style>
   footer {

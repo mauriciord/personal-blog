@@ -1,23 +1,22 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import {
-  DEFAULT_LOCALE,
   getLocaleCopy,
   getLocaleInfo,
   getLocalizedPosts,
   localizedPath,
   sortPosts,
-} from "../lib/i18n";
+} from "../../lib/i18n";
+
+const locale = "pt-BR";
 
 export async function GET(context) {
-  const locale = DEFAULT_LOCALE;
   const copy = getLocaleCopy(locale);
   const localeInfo = getLocaleInfo(locale);
   const site = context.site ?? new URL("https://mauriciord.dev");
   const posts = sortPosts(
     getLocalizedPosts(await getCollection("posts"), locale),
   );
-
   const items = await Promise.all(
     posts.map(async (post) => {
       return {

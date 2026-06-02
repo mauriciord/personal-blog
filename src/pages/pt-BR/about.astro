@@ -1,26 +1,31 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ColorScript from "../components/ColorScript.astro";
-import AboutContent from "../components/AboutContent.astro";
-import { DEFAULT_LOCALE, getLocaleCopy, getLocaleInfo } from "../lib/i18n";
-import { AUTHOR_IMAGE, AUTHOR_NAME, PERSON_ID, SOCIAL_LINKS } from "../config";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ColorScript from "../../components/ColorScript.astro";
+import AboutContent from "../../components/AboutContent.astro";
+import {
+  AUTHOR_IMAGE,
+  AUTHOR_NAME,
+  PERSON_ID,
+  SOCIAL_LINKS,
+} from "../../config";
+import { getLocaleCopy, getLocaleInfo } from "../../lib/i18n";
 
-const locale = DEFAULT_LOCALE;
+const locale = "pt-BR";
 const localeInfo = getLocaleInfo(locale);
 const copy = getLocaleCopy(locale);
 const site = Astro.site ?? Astro.url.origin;
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "@id": new URL("/about/#profile", site).toString(),
+  "@id": new URL(`${localeInfo.about}#profile`, site).toString(),
   mainEntity: {
     "@type": "Person",
     "@id": PERSON_ID,
     name: AUTHOR_NAME,
     description: copy.authorDescription,
-    url: new URL("/about/", site).toString(),
+    url: new URL(localeInfo.about, site).toString(),
     image: new URL(AUTHOR_IMAGE, site).toString(),
     sameAs: SOCIAL_LINKS,
   },
@@ -32,7 +37,7 @@ const personSchema = {
   <BaseHead
     title={copy.about.pageTitle}
     description={copy.about.pageDescription}
-    canonical="/about/"
+    canonical={localeInfo.about}
     locale={locale}
     alternatePath="/about/"
     structuredData={personSchema}

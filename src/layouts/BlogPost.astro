@@ -11,25 +11,43 @@ import {
   AUTHOR_NAME,
   DEFAULT_OG_IMAGE,
   PERSON_ID,
-  SITE_TITLE,
   SOCIAL_LINKS,
 } from "../config";
-
-const posts = await getCollection("posts");
-const allTags = getTags(posts);
+import {
+  DEFAULT_LOCALE,
+  getLocaleCopy,
+  getLocaleInfo,
+  getLocalizedPosts,
+  localizedPath,
+} from "../lib/i18n";
 
 let {
-  content: { title, description, added, updated, tags, heroImage, slug },
+  content: {
+    title,
+    description,
+    added,
+    updated,
+    tags,
+    heroImage,
+    slug,
+    locale,
+  },
 } = Astro.props;
+
+locale = locale ?? Astro.props.locale ?? DEFAULT_LOCALE;
+const localeInfo = getLocaleInfo(locale);
+const copy = getLocaleCopy(locale);
+const posts = getLocalizedPosts(await getCollection("posts"), locale);
+const allTags = getTags(posts);
 
 const rawAdded = added;
 const rawUpdated = updated ?? added;
-const canonicalPath = `/post/${slug}/`;
+const canonicalPath = localizedPath(locale, `/post/${slug}/`);
 const image = heroImage ?? DEFAULT_OG_IMAGE;
 const site = Astro.site ?? Astro.url.origin;
 const canonicalURL = new URL(canonicalPath, site);
 const imageURL = new URL(image, site);
-const authorURL = new URL("/about", site);
+const authorURL = new URL(localizedPath(locale, "/about/"), site);
 const blogPostingSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -40,6 +58,7 @@ const blogPostingSchema = {
   mainEntityOfPage: canonicalURL.toString(),
   url: canonicalURL.toString(),
   image: [imageURL.toString()],
+  inLanguage: locale,
   author: {
     "@type": "Person",
     "@id": PERSON_ID,
@@ -58,14 +77,14 @@ const blogPostingSchema = {
   keywords: tags,
 };
 
-added = new Date(added).toLocaleDateString("en-us", {
+added = new Date(added).toLocaleDateString(copy.post.dateLocale, {
   year: "numeric",
   month: "short",
   day: "numeric",
 });
 
 if (updated) {
-  updated = new Date(updated).toLocaleDateString("en-us", {
+  updated = new Date(updated).toLocaleDateString(copy.post.dateLocale, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -73,19 +92,20 @@ if (updated) {
 }
 ---
 
-<html lang="en-us">
+<html lang={localeInfo.lang}>
   <BaseHead
-    title={`${title} | ${SITE_TITLE}`}
+    title={`${title} | ${copy.siteTitle}`}
     description={description}
     image={image}
-    imageAlt={`Social preview for ${title}`}
+    imageAlt={copy.post.imageAlt(title)}
     type="article"
     canonical={canonicalPath}
+    locale={locale}
     structuredData={blogPostingSchema}
   />
 
   <body>
-    <Header />
+    <Header locale={locale} />
     <main>
       <article>
         {
@@ -94,7 +114,7 @@ if (updated) {
               width={720}
               height={360}
               src={heroImage}
-              alt={`Hero image for ${title}`}
+              alt={copy.post.heroAlt(title)}
             />
           )
         }
@@ -102,21 +122,22 @@ if (updated) {
         {
           updated ? (
             <span>
-              <time>{added}</time>, last updated on <time>{updated}</time>
+              <time>{added}</time>, {copy.post.lastUpdated}{" "}
+              <time>{updated}</time>
             </span>
           ) : (
             <span>{added && <time>{added}</time>}</span>
           )
         }
-        <Tags tags={tags} />
+        <Tags tags={tags} locale={locale} />
         <hr />
         <div class="blog-post">
           <slot />
         </div>
       </article>
     </main>
-    <Tags tags={allTags} all />
-    <Footer />
+    <Tags tags={allTags} all locale={locale} />
+    <Footer locale={locale} />
     <ColorScript />
   </body>
 </html>

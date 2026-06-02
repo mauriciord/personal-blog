@@ -1,28 +1,27 @@
 ---
 import Post from "../components/Post.astro";
+import { DEFAULT_LOCALE, getLocaleCopy, sortPosts } from "../lib/i18n";
 
-const { allPosts } = Astro.props;
+const { allPosts, locale = DEFAULT_LOCALE } = Astro.props;
+const copy = getLocaleCopy(locale);
 
 //.sort(() => 0.5 - Math.random()).slice(0, 3);
 
-let posts = allPosts
-	.sort(
-		(a, b) =>
-			new Date(b.data.updated || b.data.added).valueOf() -
-			new Date(a.data.updated || a.data.added).valueOf(),
-	)
-	.slice(0, 5);
+let posts = sortPosts(allPosts).slice(0, 5);
 ---
 
 <content>
-	<ul class="posts-list">
-		{
-			posts.map(
-				({
-					url,
-					data: { description, slug, title, tags, added: date },
-				}) => <Post {url} {description} {date} {slug} {title} {tags} />
-			)
-		}
-	</ul>
+  {
+    posts.length > 0 ? (
+      <ul class="posts-list">
+        {posts.map(
+          ({ data: { description, slug, title, tags, added: date } }) => (
+            <Post {description} {date} {slug} {title} {tags} {locale} />
+          ),
+        )}
+      </ul>
+    ) : (
+      <p class="center">{copy.posts.empty}</p>
+    )
+  }
 </content>

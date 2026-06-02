@@ -1,19 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Post from "../components/Post.astro";
-import ColorScript from "../components/ColorScript.astro";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Post from "../../components/Post.astro";
+import ColorScript from "../../components/ColorScript.astro";
 import {
-  DEFAULT_LOCALE,
   getLocaleCopy,
   getLocaleInfo,
   getLocalizedPosts,
   sortPosts,
-} from "../lib/i18n";
+} from "../../lib/i18n";
 
-const locale = DEFAULT_LOCALE;
+const locale = "pt-BR";
 const localeInfo = getLocaleInfo(locale);
 const copy = getLocaleCopy(locale);
 const posts = sortPosts(
@@ -26,7 +25,7 @@ const posts = sortPosts(
   <BaseHead
     title={copy.posts.pageTitle}
     description={copy.posts.pageDescription}
-    canonical="/posts/"
+    canonical={localeInfo.posts}
     locale={locale}
     alternatePath="/posts/"
   />

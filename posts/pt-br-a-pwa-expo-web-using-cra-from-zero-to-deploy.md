@@ -1,17 +1,17 @@
 ---
-title: A PWA Expo Web using CRA - From ZERO to Deploy
+title: Uma PWA Expo Web usando CRA - Do ZERO ao Deploy
 slug: a-pwa-expo-web-using-cra-from-zero-to-deploy
-locale: en-US
-description: "title: A PWA Expo Web using CRA - From ZERO to Deploy published: true description: Creating a PWA using Create React App tool and Expo SDK tags: expo,react-native,react,pwa cover_image:..."
+locale: pt-BR
+description: "Criando uma PWA com Create React App e Expo SDK"
 tags: []
 added: 2020-03-11T19:42:37.000Z
 ---
 
-## Introduction
+## Introdução
 
-In this post, basically, I will init a Create React App using CRA CLI and inject the Expo SDK Tools to generate a PWA, and with the same codebase, have an iOS and Android App.
+Neste post, basicamente, vou iniciar um Create React App usando a CLI do CRA e injetar as ferramentas do Expo SDK para gerar uma PWA e, com a mesma base de código, ter um app para iOS e Android.
 
-To begin, lets annotate the main tools that we'll use:
+Para começar, vamos anotar as principais ferramentas que vamos usar:
 
 - Create React App Boilerplate
 - Expo SDK
@@ -21,40 +21,40 @@ To begin, lets annotate the main tools that we'll use:
 - Styled Components
 - Netlfy/Now Deploy
 
-## Using the CRA Boilerplate
+## Usando o boilerplate do CRA
 
-To get our first boilerplate, lets try this command:
+Para obter nosso primeiro boilerplate, vamos tentar este comando:
 
-You will get the full React Application provided by Facebook Team
+Você receberá a aplicação React completa fornecida pela equipe do Facebook
 
 ```
     npx create-react-app pwaExpoTutorial
 ```
 
-## Adding React Native Ecosystem
+## Adicionando o ecossistema React Native
 
-For adding a React Native ecosystem we should add some libraries:
+Para adicionar um ecossistema React Native, devemos instalar algumas bibliotecas:
 
     yarn add expo react-native react-native-web @expo/html-elements
 
-After that, we can remove some irrelevant files
+Depois disso, podemos remover alguns arquivos irrelevantes
 
-- `public` folder
-- `*.css` files
-- `*.test` files (you can add your own test tool after)
+- pasta `public`
+- arquivos `*.css`
+- arquivos `*.test` (você pode adicionar sua própria ferramenta de testes depois)
 
-## Adding secondary libraries
+## Adicionando bibliotecas secundárias
 
     expo install react-native-svg
     yarn add react-native-web-hooks react-native-animatable styled-components
 
-1. **React Native SVG:** SVG Support (Installed with Expo, because it uses Yarn and install the appropriate version to the Expo SDK)
-2. **React Native Web Hooks:** React Hooks to be used in Web platform
-3. **React Native Animatable:** A library to add animation to our SVG, simulating the initial CRA boilerplate
+1. **React Native SVG:** suporte a SVG (instalado com Expo, porque ele usa Yarn e instala a versão apropriada para o SDK do Expo)
+2. **React Native Web Hooks:** React Hooks para serem usados na plataforma Web
+3. **React Native Animatable:** biblioteca para adicionar animação ao nosso SVG, simulando o boilerplate inicial do CRA
 
-## Babel configuration
+## Configuração do Babel
 
-It's good to configure Babel in our project, so install the expo preset and insert a **babel.config.js** on project root folder
+É bom configurar o Babel no nosso projeto, então instale o preset do Expo e insira um **babel.config.js** na raiz do projeto
 
     yarn add -D babel-preset-expo
 
@@ -62,9 +62,9 @@ It's good to configure Babel in our project, so install the expo preset and inse
 ```js
     module.exports = { presets: ['expo'] };
 ```
-## Creating shared styled components
+## Criando styled components compartilhados
 
-Create a file called **componentsWithStyles** inside something like `src/shared`
+Crie um arquivo chamado **componentsWithStyles** dentro de algo como `src/shared`
 ```jsx
     import styled from 'styled-components/native';
     import * as Animatable from 'react-native-animatable';
@@ -107,7 +107,7 @@ Create a file called **componentsWithStyles** inside something like `src/shared`
       height: ${props => props.dimension*0.4}px;
     `;
 ```
-Thinking in our logo (the SVG provided on initial CRA boilerplate), we need to set an aspect ratio to it, so create a file called **AspectView.js** inside some folder, I put it inside `src/components`
+Pensando no nosso logo (o SVG fornecido no boilerplate inicial do CRA), precisamos definir uma proporção de aspecto para ele; então crie um arquivo chamado **AspectView.js** dentro de alguma pasta, eu coloquei em `src/components`
 ```jsx
     import React, {useState} from "react";
     import {StyleSheet} from "react-native";
@@ -138,19 +138,19 @@ Thinking in our logo (the SVG provided on initial CRA boilerplate), we need to s
         );
     }
 ```
-[Thank you `@baconbrix` to share it](https://snack.expo.io/@bacon/aspectratio)
+[Obrigado `@baconbrix` por compartilhar isso](https://snack.expo.io/@bacon/aspectratio)
 
-I created an **index.js** in the same folder (`src/components`)
+Criei um **index.js** na mesma pasta (`src/components`)
 ```js
     export { default as AspectView } from './AspectView';
 ```
-You can do the same with the folder `src/shared` (create an **index.js** file), but this is not the purpose of this post, you can improve on your own.
+Você pode fazer o mesmo com a pasta `src/shared` (criar um arquivo **index.js**), mas esse não é o objetivo deste post; você pode melhorar isso por conta própria.
 
 ---
 
-## Let's dive into React Native
+## Vamos mergulhar em React Native
 
-You can create a file in the application root folder called **app.json** to define some info about your app:
+Você pode criar um arquivo na raiz da aplicação chamado **app.json** para definir algumas informações sobre seu app:
 ```json
     {
       "expo": {
@@ -170,7 +170,7 @@ You can create a file in the application root folder called **app.json** to defi
       }
     }
 ```
-Then, create an **App.js** file on the root folder
+Depois, crie um arquivo **App.js** na raiz
 ```jsx
     import React from 'react';
     import logo from './src/logo.svg';
@@ -209,13 +209,13 @@ Then, create an **App.js** file on the root folder
     
     export default App;
 ```
-Expo has a **special configuration** so you need to set entrypoint in **package.json**
+Expo tem uma **configuração especial**, então você precisa definir o entrypoint em **package.json**
 ```json
     // ...
     "main": "expo/AppEntry.js",
     // ...
 ```
-Continuing on **package.json**, we need to add our scripts:
+Continuando em **package.json**, precisamos adicionar nossos scripts:
 ```json
     // ...
     "scripts": {
@@ -229,13 +229,13 @@ Continuing on **package.json**, we need to add our scripts:
       },
     // ...
 ```
-Did you notice that after the `build`, there is the `expo-optimize`, so let's insert it on our project:
+Você percebeu que depois do `build` tem o `expo-optimize`, então vamos inseri-lo no nosso projeto:
 
     yarn add -D sharp-cli expo-optimize expo-cli@3.13.0
 
-It's using specific version of **Expo CLI (v3.13.0)** because, at the time of this post, the last version of the CLI was having a problem when being referenced by the Workbox, so, as a precaution, one of the last versions was added
+Ele usa uma versão específica do **Expo CLI (v3.13.0)** porque, na época deste post, a última versão da CLI estava com um problema quando era referenciada pelo Workbox; então, por precaução, foi adicionada uma das últimas versões.
 
-Last  but not least, we should increment some folders in `.gitignore`:
+Por fim, devemos adicionar algumas pastas no `.gitignore`:
 
     #expo
     .expo
@@ -245,19 +245,19 @@ Last  but not least, we should increment some folders in `.gitignore`:
     .idea
     .vscode
 
-1. **.expo:** Cache folder
-2. **web-build:** The web bundle
-3. **.idea & .vscode:** IDEs folders
+1. **.expo:** pasta de cache
+2. **web-build:** o bundle web
+3. **.idea & .vscode:** pastas de IDEs
 
-That's it, so you can try it running `yarn debug-prod`. =-]
+É isso; agora você pode testar executando `yarn debug-prod`. =-]
 
-## Deploy via Netlify or Now
+## Deploy via Netlify ou Now
 
-You can use this project as a Git repository, so on Netlify or Now, you can use the Github/Gitlab/Bitbucket repo synced with the `master`. You have only to set the **build command** as `yarn now-build` and the **output folder** as `web-build/`, so everytime you push commit to master, it will be deployed in the services (Netlify/Now).
+Você pode usar este projeto como um repositório Git; então, no Netlify ou Now, você pode usar o repositório do Github/Gitlab/Bitbucket sincronizado com o `master`. Você só precisa definir o **build command** como `yarn now-build` e a **pasta de saída** como `web-build/`, então toda vez que você fizer push para o master, ele será implantado nos serviços (Netlify/Now).
 
-## Whats next?
+## O que vem a seguir?
 
-- Typescript - Expo has an incredible support for TS
+- Typescript - Expo tem um suporte incrível para TS
 - Workbox
 - GraphQL
 
@@ -269,4 +269,4 @@ You can use this project as a Git repository, so on Netlify or Now, you can use 
 
 ![Alt Text](/assets/a-pwa-expo-web-using-cra-from-zero-to-deploy/fxVIMNlI0.png)
 
-Thanks, 😎
+Obrigado, 😎

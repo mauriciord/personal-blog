@@ -1,27 +1,26 @@
 ---
-import { AUTHOR_NAME } from "../config";
+import { DEFAULT_LOCALE, getLocaleCopy, localizedPath } from "../lib/i18n";
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const copy = getLocaleCopy(locale).about;
+const newsletterPath = localizedPath(locale, "/newsletter/");
+const rssPath = localizedPath(locale, "/rss.xml");
 ---
 
-<h1>About {AUTHOR_NAME}</h1>
+<h1>{copy.heading}</h1>
+
+<p>{copy.intro}</p>
+
+<p>{copy.details}</p>
 
 <p>
-  I'm a software engineer writing practical notes about web development, open
-  source, tooling, and the lessons I learn while building products.
+  {copy.linksPrefix}
+  <a href="https://github.com/mauriciord">GitHub</a>,
+  <a href="https://linkedin.com/in/mauriciord">LinkedIn</a>, {copy.linksSuffix}
+  <a href={newsletterPath}>{copy.newsletterLink}</a>.
 </p>
 
 <p>
-  This blog is where I collect implementation notes, deployment guides,
-  debugging write-ups, and reflections from real projects. I write for other
-  engineers who want pragmatic, experience-based details rather than polished
-  marketing copy.
-</p>
-
-<p>
-  You can also find me on <a href="https://github.com/mauriciord">GitHub</a>,
-  <a href="https://linkedin.com/in/mauriciord">LinkedIn</a>, and through the
-  <a href="/newsletter/">newsletter</a>.
-</p>
-
-<p>
-  If you prefer feeds, subscribe to the <a href="/rss.xml">blog RSS feed</a>.
+  {copy.rssPrefix}
+  <a href={rssPath}>{copy.rssLink}</a>.
 </p>
