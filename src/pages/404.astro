@@ -10,19 +10,24 @@ import getTags from "../scripts/getTags";
 
 const posts = await getCollection("posts");
 const tags = getTags(posts);
+const pageTitle = `Page not found | ${SITE_TITLE}`;
 ---
 
 <!doctype html>
 <html lang="en-us">
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			404: Page not found
+  <BaseHead
+    title={pageTitle}
+    description={SITE_DESCRIPTION}
+    robots="noindex, follow"
+  />
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      404: Page not found
 
-			<Tags tags={tags} all />
-		</main>
-		<Footer />
-		<ColorScript />
-	</body>
+      <Tags tags={tags} all />
+    </main>
+    <Footer />
+    <ColorScript />
+  </body>
 </html>

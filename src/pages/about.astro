@@ -1,0 +1,51 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ColorScript from "../components/ColorScript.astro";
+import AboutContent from "../components/AboutContent.astro";
+import {
+  AUTHOR_DESCRIPTION,
+  AUTHOR_IMAGE,
+  AUTHOR_NAME,
+  PERSON_ID,
+  SITE_TITLE,
+  SOCIAL_LINKS,
+} from "../config";
+
+const pageTitle = `About ${AUTHOR_NAME} | ${SITE_TITLE}`;
+const pageDescription = `Learn more about ${AUTHOR_NAME}, a software engineer writing practical notes about web development, open source, tooling, and building products.`;
+const site = Astro.site ?? Astro.url.origin;
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": new URL("/about/#profile", site).toString(),
+  mainEntity: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: AUTHOR_NAME,
+    description: AUTHOR_DESCRIPTION,
+    url: new URL("/about/", site).toString(),
+    image: new URL(AUTHOR_IMAGE, site).toString(),
+    sameAs: SOCIAL_LINKS,
+  },
+};
+---
+
+<!doctype html>
+<html lang="en-us">
+  <BaseHead
+    title={pageTitle}
+    description={pageDescription}
+    canonical="/about/"
+    structuredData={personSchema}
+  />
+  <body>
+    <Header />
+    <main>
+      <AboutContent />
+    </main>
+    <Footer />
+    <ColorScript />
+  </body>
+</html>

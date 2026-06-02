@@ -6,58 +6,117 @@ import Footer from "../components/Footer.astro";
 import ColorScript from "../components/ColorScript.astro";
 import Tags from "../components/Tags.astro";
 import getTags from "../scripts/getTags";
+import {
+  AUTHOR_IMAGE,
+  AUTHOR_NAME,
+  DEFAULT_OG_IMAGE,
+  PERSON_ID,
+  SITE_TITLE,
+  SOCIAL_LINKS,
+} from "../config";
 
 const posts = await getCollection("posts");
 const allTags = getTags(posts);
 
 let {
-	content: { title, description, added, updated, tags, heroImage },
+  content: { title, description, added, updated, tags, heroImage, slug },
 } = Astro.props;
 
-added = new Date(added).toLocaleDateString(
-	"en-us",
-	{
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	}
-);
+const rawAdded = added;
+const rawUpdated = updated ?? added;
+const canonicalPath = `/post/${slug}/`;
+const image = heroImage ?? DEFAULT_OG_IMAGE;
+const site = Astro.site ?? Astro.url.origin;
+const canonicalURL = new URL(canonicalPath, site);
+const imageURL = new URL(image, site);
+const authorURL = new URL("/about", site);
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  datePublished: new Date(rawAdded).toISOString(),
+  dateModified: new Date(rawUpdated).toISOString(),
+  mainEntityOfPage: canonicalURL.toString(),
+  url: canonicalURL.toString(),
+  image: [imageURL.toString()],
+  author: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: AUTHOR_NAME,
+    url: authorURL.toString(),
+    image: new URL(AUTHOR_IMAGE, site).toString(),
+    sameAs: SOCIAL_LINKS,
+  },
+  publisher: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: AUTHOR_NAME,
+    url: authorURL.toString(),
+    image: new URL(AUTHOR_IMAGE, site).toString(),
+  },
+  keywords: tags,
+};
+
+added = new Date(added).toLocaleDateString("en-us", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
 
 if (updated) {
-	updated = new Date(updated).toLocaleDateString(
-		"en-us",
-		{
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		}
-	);
+  updated = new Date(updated).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 ---
 
 <html lang="en-us">
-	<BaseHead title={title} description={description} />
+  <BaseHead
+    title={`${title} | ${SITE_TITLE}`}
+    description={description}
+    image={image}
+    imageAlt={`Social preview for ${title}`}
+    type="article"
+    canonical={canonicalPath}
+    structuredData={blogPostingSchema}
+  />
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-				<h1 class="article-title">{title}</h1>
-				{updated ?
-					<span><time>{added}</time>, last updated on <time>{updated}</time></span>
-					:
-					<span>{added && <time>{added}</time>}</span>
-				}
-				<Tags tags={tags} />
-				<hr />
-				<div class="blog-post">
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Tags tags={allTags} all />
-		<Footer />
-		<ColorScript />
-	</body>
+  <body>
+    <Header />
+    <main>
+      <article>
+        {
+          heroImage && (
+            <img
+              width={720}
+              height={360}
+              src={heroImage}
+              alt={`Hero image for ${title}`}
+            />
+          )
+        }
+        <h1 class="article-title">{title}</h1>
+        {
+          updated ? (
+            <span>
+              <time>{added}</time>, last updated on <time>{updated}</time>
+            </span>
+          ) : (
+            <span>{added && <time>{added}</time>}</span>
+          )
+        }
+        <Tags tags={tags} />
+        <hr />
+        <div class="blog-post">
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Tags tags={allTags} all />
+    <Footer />
+    <ColorScript />
+  </body>
 </html>

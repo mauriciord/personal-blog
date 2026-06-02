@@ -6,60 +6,66 @@ import Footer from "../../components/Footer.astro";
 import Post from "../../components/Post.astro";
 import ColorScript from "../../components/ColorScript.astro";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../config";
+import { SITE_TITLE } from "../../config";
 
 export async function getStaticPaths() {
-	let posts = await getCollection("posts");
-	const tags = posts.reduce((allTags, post) => {
-		const postTags = post.data.tags;
-		if (postTags) {
-			postTags.forEach((tag) => {
-				if (!allTags[tag]) {
-					allTags[tag] = [];
-				}
-				allTags[tag].push(post);
-			});
-		}
-		return allTags;
-	}, {});
+  let posts = await getCollection("posts");
+  const tags = posts.reduce((allTags, post) => {
+    const postTags = post.data.tags;
+    if (postTags) {
+      postTags.forEach((tag) => {
+        if (!allTags[tag]) {
+          allTags[tag] = [];
+        }
+        allTags[tag].push(post);
+      });
+    }
+    return allTags;
+  }, {});
 
-	return Object.keys(tags).map((t) => {
-		return {
-			params: { tag: t },
-			props: { tag: tags[t] },
-		};
-	});
+  return Object.keys(tags).map((t) => {
+    return {
+      params: { tag: t },
+      props: { tag: tags[t] },
+    };
+  });
 }
 
 const { tag } = Astro.props;
 const { tag: currentTag } = Astro.params;
+const pageTitle = `Posts tagged ${currentTag} | ${SITE_TITLE}`;
+const pageDescription = `Software engineering posts tagged ${currentTag} on Mauricio's blog.`;
 
 let sortedPosts = tag.sort(
-	(a, b) => new Date(b.data.added).valueOf() - new Date(a.data.added).valueOf(),
+  (a, b) => new Date(b.data.added).valueOf() - new Date(a.data.added).valueOf(),
 );
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-us">
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	<body>
-		<Header />
-		<main>
-			<content>
-				<h3>Posts tagged with "{currentTag}"</h3>
-				<ul class="tags-list">
-					{
-						sortedPosts.map(
-							({
-								url,
-								data: { description, slug, title, tags, added: date },
-							}) => <Post {url} {description} {date} {slug} {title} {tags} />
-						)
-					}
-				</ul>
-			</content>
-			<Footer />
-		</main>
-		<ColorScript />
-	</body>
+  <BaseHead
+    title={pageTitle}
+    description={pageDescription}
+    canonical={`/tag/${currentTag}/`}
+  />
+  <body>
+    <Header />
+    <main>
+      <content>
+        <h3>Posts tagged with "{currentTag}"</h3>
+        <ul class="tags-list">
+          {
+            sortedPosts.map(
+              ({
+                url,
+                data: { description, slug, title, tags, added: date },
+              }) => <Post {url} {description} {date} {slug} {title} {tags} />,
+            )
+          }
+        </ul>
+      </content>
+      <Footer />
+    </main>
+    <ColorScript />
+  </body>
 </html>

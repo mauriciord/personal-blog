@@ -6,13 +6,17 @@ import ColorScript from "../components/ColorScript.astro";
 import { SITE_TITLE } from "../config";
 
 const newsletterApi = import.meta.env.NEWSLETTER_API;
+const pageTitle = `Newsletter | ${SITE_TITLE}`;
+const pageDescription =
+  "A newsletter about web development, software engineering, open source, and practical lessons from building products.";
 ---
 
 <!doctype html>
 <html lang="en-us">
   <BaseHead
-    title={`Newsletter | ${SITE_TITLE}`}
-    description="A weekly newsletter about web development, software engineering, and life. Join me for technical insights and personal stories."
+    title={pageTitle}
+    description={pageDescription}
+    canonical="/newsletter/"
   />
   <body>
     <Header />
@@ -22,8 +26,11 @@ const newsletterApi = import.meta.env.NEWSLETTER_API;
 
       <section class="newsletter-content">
         <p>
-          Every week, I share what's on my mind about <strong>web development</strong>,
-          <strong>software engineering</strong>, and the occasional personal story.
+          Every week, I share what's on my mind about <strong
+            >web development</strong
+          >,
+          <strong>software engineering</strong>, and the occasional personal
+          story.
         </p>
         <p>
           From practical tips and lessons learned to thoughts on the industry
@@ -59,14 +66,30 @@ const newsletterApi = import.meta.env.NEWSLETTER_API;
     <ColorScript />
 
     <script>
-      const form = document.getElementById("newsletter-form") as HTMLFormElement;
-      const message = document.getElementById("form-message") as HTMLParagraphElement;
+      const form = document.getElementById(
+        "newsletter-form",
+      ) as HTMLFormElement;
+      const message = document.getElementById(
+        "form-message",
+      ) as HTMLParagraphElement;
       const apiUrl = form.dataset.api;
+
+      if (!apiUrl) {
+        form.hidden = true;
+        message.textContent =
+          "Newsletter subscriptions are temporarily unavailable. You can still read the archive or subscribe with RSS.";
+        message.classList.add("error");
+        message.hidden = false;
+      }
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+        if (!apiUrl) return;
+
+        const emailInput = form.querySelector(
+          'input[name="email"]',
+        ) as HTMLInputElement;
         const button = form.querySelector("button") as HTMLButtonElement;
         const email = emailInput.value;
 
@@ -85,7 +108,8 @@ const newsletterApi = import.meta.env.NEWSLETTER_API;
           });
 
           if (response.ok) {
-            message.textContent = "Thanks for subscribing! Check your email to confirm.";
+            message.textContent =
+              "Thanks for subscribing! Check your email to confirm.";
             message.classList.remove("error");
             message.classList.add("success");
             emailInput.value = "";
