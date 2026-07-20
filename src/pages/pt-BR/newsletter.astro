@@ -50,6 +50,7 @@ const newsletter = copy.newsletter;
             required
             aria-label={newsletter.emailLabel}
           />
+          <input type="hidden" name="tag" value="language-pt" />
           <button type="submit">{newsletter.submit}</button>
         </form>
         <p id="form-message" class="form-message" hidden></p>
@@ -101,16 +102,14 @@ const newsletter = copy.newsletter;
           'input[name="email"]',
         ) as HTMLInputElement;
         const button = form.querySelector("button") as HTMLButtonElement;
-        const email = emailInput.value;
 
         button.disabled = true;
         button.textContent = submittingLabel;
         message.hidden = true;
 
         try {
-          const formData = new FormData();
-          formData.append("email", email);
-          formData.append("embed", "1");
+          const formData = new FormData(form);
+          formData.set("embed", "1");
 
           const response = await fetch(apiUrl!, {
             method: "POST",
