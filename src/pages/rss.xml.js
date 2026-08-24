@@ -1,5 +1,6 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
+import { markdownToRssHtml } from "../lib/rss-content";
 import {
   DEFAULT_LOCALE,
   getLocaleCopy,
@@ -14,6 +15,7 @@ export async function GET(context) {
   const copy = getLocaleCopy(locale);
   const localeInfo = getLocaleInfo(locale);
   const site = context.site ?? new URL("https://mauriciord.dev");
+  const feedSite = new URL(localeInfo.home, site);
   const posts = sortPosts(
     getLocalizedPosts(await getCollection("posts"), locale),
   );
@@ -25,6 +27,7 @@ export async function GET(context) {
         title: post.data.title,
         pubDate: post.data.added,
         description: post.data.description,
+        content: markdownToRssHtml(post.body, feedSite),
       };
     }),
   );
@@ -32,7 +35,7 @@ export async function GET(context) {
   return rss({
     title: copy.siteTitle || "",
     description: copy.siteDescription || "",
-    site: new URL(localeInfo.home, site),
+    site: feedSite,
     customData: `<language>${locale}</language>`,
     items,
   });

@@ -18,6 +18,8 @@
 	},
 	"dependencies": {
 		"@tinacms/cli": "^1.10.2",
+		"markdown-it": "^15.0.0",
+		"sanitize-html": "^2.17.7",
 		"tinacms": "^2.8.2"
 	}
 }
