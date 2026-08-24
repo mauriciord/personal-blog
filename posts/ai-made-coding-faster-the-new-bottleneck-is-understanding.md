@@ -10,9 +10,9 @@ tags:
 added: 2026-08-24T00:00:00.000Z
 ---
 
-![](/assets/image.jpg)
-
 *When software grows faster than our mental model of it, productivity can turn into exhaustion, and the profession needs to find its center again.*
+
+![](/assets/image.jpg)
 
 Not long ago, one of the clearest limits on a software project was the number of hands available to write code. There was a backlog, there were deadlines, there was a list of problems that looked simple on paper and took days, sometimes weeks, to become a stable solution.
 
