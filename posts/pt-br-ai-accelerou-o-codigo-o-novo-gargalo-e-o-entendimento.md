@@ -10,9 +10,9 @@ tags:
 added: 2026-08-24T00:00:00.000Z
 ---
 
-![](/assets/image.jpg)
-
 *Quando o software cresce mais rápido que o nosso modelo mental sobre ele, produtividade pode virar exaustão, e a profissão precisa reencontrar seu centro.*
+
+![](/assets/image.jpg)
 
 Há pouco tempo, um dos limites mais evidentes de um projeto de software era a quantidade de mãos disponíveis para escrever código. Havia backlog, havia prazo, havia uma lista de problemas que pareciam simples no papel e demoravam dias, às vezes semanas, para virar uma solução estável.
 
