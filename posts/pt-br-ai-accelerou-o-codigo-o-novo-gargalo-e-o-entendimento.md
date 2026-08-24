@@ -1,14 +1,16 @@
 ---
+locale: pt-BR
 title: A IA acelerou o código. O novo gargalo é o entendimento.
 slug: ai-accelerou-o-codigo-o-novo-gargalo-e-o-entendimento
-locale: pt-BR
-description: Quando o software cresce mais rápido que o nosso modelo mental, produtividade pode virar exaustão.
+description: 'Quando o software cresce mais rápido que o nosso modelo mental, produtividade pode virar exaustão.'
 tags:
   - technical
   - advice
   - work
 added: 2026-08-24T00:00:00.000Z
 ---
+
+**![](/assets/image.jpg)
 
 *Quando o software cresce mais rápido que o nosso modelo mental sobre ele, produtividade pode virar exaustão, e a profissão precisa reencontrar seu centro.*
 
@@ -68,12 +70,12 @@ Código sempre foi um meio para transformar uma intenção em algo útil: uma ex
 
 Com a IA reduzindo parte desse esforço, sobra mais espaço e mais responsabilidade para aquilo que não pode ser terceirizado com facilidade:
 
-- compreender profundamente o problema antes de pedir uma solução;
-- identificar as restrições que não estão escritas em nenhum ticket;
-- escolher o que vale a pena construir e o que deve ficar de fora;
-- perceber riscos técnicos, humanos e de produto;
-- criar critérios para decidir se uma resposta “funciona” de verdade;
-- sustentar uma direção quando há muitas opções possíveis.
+* compreender profundamente o problema antes de pedir uma solução;
+* identificar as restrições que não estão escritas em nenhum ticket;
+* escolher o que vale a pena construir e o que deve ficar de fora;
+* perceber riscos técnicos, humanos e de produto;
+* criar critérios para decidir se uma resposta “funciona” de verdade;
+* sustentar uma direção quando há muitas opções possíveis.
 
 Isso não é uma desvalorização da engenharia. É uma versão mais exigente dela. A técnica continua essencial, mas precisa estar conectada a julgamento, contexto e responsabilidade.
 
