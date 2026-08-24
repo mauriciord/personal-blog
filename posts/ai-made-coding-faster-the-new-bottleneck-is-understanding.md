@@ -1,14 +1,16 @@
 ---
+locale: en-US
 title: AI Made Coding Faster. The New Bottleneck Is Understanding.
 slug: ai-made-coding-faster-the-new-bottleneck-is-understanding
-locale: en-US
-description: When software grows faster than our mental model of it, productivity can turn into exhaustion.
+description: 'When software grows faster than our mental model of it, productivity can turn into exhaustion.'
 tags:
   - technical
   - advice
   - work
 added: 2026-08-24T00:00:00.000Z
 ---
+
+**![](/assets/image.jpg)
 
 *When software grows faster than our mental model of it, productivity can turn into exhaustion, and the profession needs to find its center again.*
 
@@ -68,12 +70,12 @@ Code has always been a means of transforming an intention into something useful:
 
 With AI reducing part of that effort, there is more room and more responsibility for what cannot be easily outsourced:
 
-- understanding the problem deeply before asking for a solution;
-- identifying constraints that are not written in any ticket;
-- choosing what is worth building and what should stay out;
-- noticing technical, human, and product risks;
-- creating criteria for deciding whether an answer truly “works”;
-- holding a direction when many options are possible.
+* understanding the problem deeply before asking for a solution;
+* identifying constraints that are not written in any ticket;
+* choosing what is worth building and what should stay out;
+* noticing technical, human, and product risks;
+* creating criteria for deciding whether an answer truly “works”;
+* holding a direction when many options are possible.
 
 This is not a devaluation of engineering. It is a more demanding version of it. Technical skill remains essential, but it needs to be connected to judgment, context, and responsibility.
 
