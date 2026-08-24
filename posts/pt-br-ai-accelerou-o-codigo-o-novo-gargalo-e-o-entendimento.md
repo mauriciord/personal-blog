@@ -10,7 +10,7 @@ tags:
 added: 2026-08-24T00:00:00.000Z
 ---
 
-**![](/assets/image.jpg)
+![](/assets/image.jpg)
 
 *Quando o software cresce mais rápido que o nosso modelo mental sobre ele, produtividade pode virar exaustão, e a profissão precisa reencontrar seu centro.*
 
