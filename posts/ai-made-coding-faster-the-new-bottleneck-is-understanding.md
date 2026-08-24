@@ -10,7 +10,7 @@ tags:
 added: 2026-08-24T00:00:00.000Z
 ---
 
-**![](/assets/image.jpg)
+![](/assets/image.jpg)
 
 *When software grows faster than our mental model of it, productivity can turn into exhaustion, and the profession needs to find its center again.*
 
