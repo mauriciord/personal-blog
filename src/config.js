@@ -8,7 +8,7 @@ export const AUTHOR_HANDLE = "@mauriciord";
 export const AUTHOR_DESCRIPTION =
   "Software engineer writing about web development, open source, tooling, and practical lessons from building products.";
 export const AUTHOR_IMAGE = "/assets/SQUARE-profile_mustache_front.jpg";
-export const DEFAULT_OG_IMAGE = "/home-blog-card.png";
+export const DEFAULT_OG_IMAGE = "/og/default.png";
 export const PERSON_ID = `${SITE_URL}/#person`;
 
 export const SOCIAL_LINKS = [

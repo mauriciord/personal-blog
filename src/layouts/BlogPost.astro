@@ -9,7 +9,6 @@ import getTags from "../scripts/getTags";
 import {
   AUTHOR_IMAGE,
   AUTHOR_NAME,
-  DEFAULT_OG_IMAGE,
   PERSON_ID,
   SOCIAL_LINKS,
 } from "../config";
@@ -32,6 +31,7 @@ let {
     slug,
     locale,
   },
+  postId,
 } = Astro.props;
 
 locale = locale ?? Astro.props.locale ?? DEFAULT_LOCALE;
@@ -43,7 +43,7 @@ const allTags = getTags(posts);
 const rawAdded = added;
 const rawUpdated = updated ?? added;
 const canonicalPath = localizedPath(locale, `/post/${slug}/`);
-const image = heroImage ?? DEFAULT_OG_IMAGE;
+const image = `/og/${encodeURIComponent(postId)}.png`;
 const site = Astro.site ?? Astro.url.origin;
 const canonicalURL = new URL(canonicalPath, site);
 const imageURL = new URL(image, site);
