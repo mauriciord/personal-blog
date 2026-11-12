@@ -161,7 +161,7 @@ const newsletter = copy.newsletter;
   }
 
   .subscribe-section {
-    background: var(--pink);
+    background: var(--pink-surface, var(--pink));
     padding: 1.5em;
     border-radius: 8px;
     margin: 2em 0;
@@ -175,12 +175,12 @@ const newsletter = copy.newsletter;
 
   .subscribe-form input[type="email"] {
     padding: 0.75em 1em;
-    border: 2px solid var(--black);
+    border: 2px solid var(--text);
     border-radius: 4px;
     font-family: inherit;
     font-size: 1em;
-    background: var(--white);
-    color: var(--black);
+    background: var(--surface);
+    color: var(--text);
   }
 
   .subscribe-form input[type="email"]::placeholder {
@@ -193,8 +193,8 @@ const newsletter = copy.newsletter;
     border-radius: 4px;
     font-family: inherit;
     font-size: 1em;
-    background: var(--black);
-    color: var(--white);
+    background: var(--text);
+    color: var(--page);
     cursor: pointer;
     transition: opacity 0.2s ease;
   }
@@ -217,7 +217,7 @@ const newsletter = copy.newsletter;
 
   .form-message.success {
     background: var(--green);
-    color: var(--black);
+    color: var(--active-text, var(--black));
   }
 
   .form-message.error {
@@ -228,22 +228,5 @@ const newsletter = copy.newsletter;
   .newsletter-links {
     text-align: center;
     margin-top: 2em;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .subscribe-section {
-      background: var(--pink);
-    }
-
-    .subscribe-form input[type="email"] {
-      background: var(--black);
-      color: var(--white);
-      border-color: var(--white);
-    }
-
-    .subscribe-form button {
-      background: var(--white);
-      color: var(--black);
-    }
   }
 </style>

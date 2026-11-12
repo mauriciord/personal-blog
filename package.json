@@ -3,6 +3,7 @@
 	"version": "0.0.6",
 	"private": true,
 	"scripts": {
+		"test:theme": "node --test tests/theme.test.js",
 		"dev": "npx tinacms dev -c \"astro dev\"",
 		"start": "astro dev",
 		"build": "tinacms build && astro build",

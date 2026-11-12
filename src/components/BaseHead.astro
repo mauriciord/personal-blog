@@ -39,6 +39,15 @@ const alternateLinks = alternatePath ? getLocaleAlternates(alternatePath) : [];
 ---
 
 <head>
+  <script is:inline>
+    try {
+      const theme = localStorage.getItem("blog-theme");
+      document.documentElement.dataset.theme =
+        theme === "light" ? "light" : "dark";
+    } catch {
+      document.documentElement.dataset.theme = "dark";
+    }
+  </script>
   <!-- Global Metadata -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
