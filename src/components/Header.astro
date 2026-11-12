@@ -2,7 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 import { DEFAULT_LOCALE, getLocaleCopy, getLocaleInfo } from "../lib/i18n";
 
-const { locale = DEFAULT_LOCALE, title, description } = Astro.props;
+const { locale = DEFAULT_LOCALE, title, description, languageLinks = {} } = Astro.props;
 const copy = getLocaleCopy(locale);
 const info = getLocaleInfo(locale);
 const englishInfo = getLocaleInfo(DEFAULT_LOCALE);
@@ -23,7 +23,7 @@ const portugueseInfo = getLocaleInfo("pt-BR");
               "language-option",
               { active: locale === DEFAULT_LOCALE },
             ]}
-            href={englishInfo.home}
+            href={languageLinks[DEFAULT_LOCALE] ?? englishInfo.home}
             lang={englishInfo.lang}
             hreflang={englishInfo.lang}
             aria-current={locale === DEFAULT_LOCALE ? "true" : undefined}
@@ -33,7 +33,7 @@ const portugueseInfo = getLocaleInfo("pt-BR");
           <span class="language-divider" aria-hidden="true">|</span>
           <a
             class:list={["language-option", { active: locale === "pt-BR" }]}
-            href={portugueseInfo.home}
+            href={languageLinks["pt-BR"] ?? portugueseInfo.home}
             lang={portugueseInfo.lang}
             hreflang={portugueseInfo.lang}
             aria-current={locale === "pt-BR" ? "true" : undefined}

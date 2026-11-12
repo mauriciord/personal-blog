@@ -2,6 +2,7 @@
 locale: en-US
 title: AI Made Coding Faster. The New Bottleneck Is Understanding.
 slug: ai-made-coding-faster-the-new-bottleneck-is-understanding
+translationKey: ai-coding-understanding
 description: 'When software grows faster than our mental model of it, productivity can turn into exhaustion.'
 tags:
   - technical

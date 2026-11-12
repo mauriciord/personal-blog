@@ -70,6 +70,12 @@ export default defineConfig({
 						required: true,
 					},
 					{
+						label: "Translation key",
+						name: "translationKey",
+						type: "string",
+						description: "Use the same key for translations with different slugs.",
+					},
+					{
 						label: "Description",
 						name: "description",
 						type: "string",

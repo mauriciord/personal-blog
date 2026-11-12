@@ -11,6 +11,7 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     slug: z.string(),
+    translationKey: z.string().optional(),
     description: z.string(),
     locale: z.enum(["en-US", "pt-BR"]).default("en-US"),
     added: z.union([z.string(), z.date()]),

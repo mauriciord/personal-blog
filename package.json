@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"test:theme": "node --test tests/theme.test.js",
+		"test:post-language-links": "node --test tests/post-language-links.test.js",
 		"dev": "npx tinacms dev -c \"astro dev\"",
 		"start": "astro dev",
 		"build": "tinacms build && astro build",

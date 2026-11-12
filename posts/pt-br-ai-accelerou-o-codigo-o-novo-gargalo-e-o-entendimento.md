@@ -2,6 +2,7 @@
 locale: pt-BR
 title: A IA acelerou o código. O novo gargalo é o entendimento.
 slug: ai-accelerou-o-codigo-o-novo-gargalo-e-o-entendimento
+translationKey: ai-coding-understanding
 description: 'Quando o software cresce mais rápido que o nosso modelo mental, produtividade pode virar exaustão.'
 tags:
   - technical

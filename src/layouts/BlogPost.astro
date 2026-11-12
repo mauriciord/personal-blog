@@ -29,6 +29,7 @@ let {
     tags,
     heroImage,
     slug,
+    translationKey,
     locale,
   },
   postId,
@@ -37,7 +38,22 @@ let {
 locale = locale ?? Astro.props.locale ?? DEFAULT_LOCALE;
 const localeInfo = getLocaleInfo(locale);
 const copy = getLocaleCopy(locale);
-const posts = getLocalizedPosts(await getCollection("posts"), locale);
+const allPosts = await getCollection("posts");
+const posts = getLocalizedPosts(allPosts, locale);
+const languageLinks = Object.fromEntries(
+  [DEFAULT_LOCALE, "pt-BR"].map((targetLocale) => {
+    const translation = getLocalizedPosts(allPosts, targetLocale).find(
+      (post) =>
+        (post.data.translationKey ?? post.data.slug) === (translationKey ?? slug),
+    );
+    return [
+      targetLocale,
+      translation
+        ? localizedPath(targetLocale, `/post/${translation.data.slug}/`)
+        : getLocaleInfo(targetLocale).home,
+    ];
+  }),
+);
 const allTags = getTags(posts);
 
 const rawAdded = added;
@@ -105,7 +121,7 @@ if (updated) {
   />
 
   <body>
-    <Header locale={locale} />
+    <Header locale={locale} languageLinks={languageLinks} />
     <main>
       <article>
         {
